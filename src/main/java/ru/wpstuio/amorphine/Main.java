@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutionException;
 public class Main {
 
     public static void main(String[] args) {
-        File file = new File("/home/amorphine/mine-thermos/world/region/r.-1.0.mca");
+        File file = new File("C:\\Users\\User\\Downloads\\r.-1.0.mca");
 
         RegionFile region = new RegionFile(file);
 
