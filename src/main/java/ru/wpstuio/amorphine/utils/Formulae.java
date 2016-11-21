@@ -26,7 +26,6 @@ public class Formulae {
         return mod(block, 16);
     }
 
-
     // Chunk Set
     public static int regionFromChunk(int chunk) {
         return (chunk >> 5);
@@ -45,18 +44,18 @@ public class Formulae {
         return (chunk * 16 + localBlock);
     }
 
-    public int localChunkFromChunk (int chunk)
+    public static int localChunkFromChunk (int chunk)
     {
         return mod(chunk, 32);
     }
 
-    private String localBlockFromChunk (int chunk)
+    public static String localBlockFromChunk (int chunk)
     {
         return "(0 to 15)";
     }
 
     // Region Set
-    private int[] chunkFromRegion (int region)
+    public static int[] chunkFromRegion (int region)
     {
         int start = region * 32;
         int end = (region + 1) * 32 - 1;
@@ -66,7 +65,7 @@ public class Formulae {
         return result;
     }
 
-    private int[] blockFromRegion (int region)
+    public static int[] blockFromRegion (int region)
     {
         int start = region * 32 * 16;
         int end = (region + 1) * 32 * 16 - 1;
@@ -76,20 +75,26 @@ public class Formulae {
         return result;
     }
 
-    private int chunkFromLocalChunk (int region, int localChunk)
+    public static int chunkFromLocalChunk (int region, int localChunk)
     {
         return (region * 32 + localChunk);
     }
 
-    private int chunkFromLocalBlock (int region, int localChunk, int localBlock)
+    public static int chunkFromLocalBlock (int region, int localChunk, int localBlock)
     {
         return (region * 32 + localChunk);
     }
 
-    private int blockFromLocalBlock (int region, int localChunk, int localBlock)
+    public static int blockFromLocalBlock (int region, int localChunk, int localBlock)
     {
         return (region * 32 * 16 + localChunk * 16 + localBlock);
     }
+
+    public static int sectionFromBlock (int y) {
+        return y/16;
+    }
+
+
 
     /*
     private string LocalChunkFromRegion (int region)
