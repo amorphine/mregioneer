@@ -6,6 +6,7 @@ import com.flowpowered.nbt.ListTag;
 import com.flowpowered.nbt.stream.NBTInputStream;
 import com.flowpowered.nbt.stream.NBTOutputStream;
 import net.minecraft.world.level.chunk.storage.RegionFile;
+import ru.wpstuio.amorphine.mcaliases.Region;
 
 import java.io.File;
 import java.nio.ByteOrder;
@@ -28,6 +29,10 @@ public class Main {
         }
 
         RegionFile region = new RegionFile(file);
+
+        Region rg = new Region(region);
+
+        /*
 
         try {
 
@@ -88,6 +93,7 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
     }
 
     static byte Nibble4(byte[] arr, int index){
