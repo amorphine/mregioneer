@@ -5,8 +5,7 @@ import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.NbtIo;
 import net.minecraft.world.level.chunk.storage.RegionFile;
 
-import java.io.IOException;
-import java.nio.ByteOrder;
+import java.io.DataInputStream;
 
 /**
  * Created by amorphine on 21.11.16.
@@ -19,8 +18,10 @@ public class Region {
             for(int j = 31; j >= 0; j--) {
                 CompoundTag tag;
                 try {
-                    tag = NbtIo.read(region_file.getChunkDataInputStream(i, j));
-                    region_file.getChunkDataInputStream(i, j);
+                    DataInputStream stream = region_file.getChunkDataInputStream(i, j);
+                    tag = NbtIo.read(stream);
+                    stream.close();
+
                 } catch (Exception e) {
                     tag = null;
                 }
@@ -32,5 +33,9 @@ public class Region {
                 this.chunks[i][j] = chunk;
             }
         }
+    }
+
+    public Chunk[][] getChunks() {
+        return chunks;
     }
 }

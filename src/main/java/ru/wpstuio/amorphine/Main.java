@@ -1,25 +1,24 @@
 package ru.wpstuio.amorphine;
 
-import com.flowpowered.nbt.ByteArrayTag;
-import com.flowpowered.nbt.CompoundTag;
-import com.flowpowered.nbt.ListTag;
-import com.flowpowered.nbt.stream.NBTInputStream;
 import com.flowpowered.nbt.stream.NBTOutputStream;
+import com.mojang.nbt.NbtIo;
 import net.minecraft.world.level.chunk.storage.RegionFile;
+import ru.wpstuio.amorphine.mcaliases.Chunk;
 import ru.wpstuio.amorphine.mcaliases.Region;
 
+import java.io.DataOutput;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.nio.ByteOrder;
-import java.util.List;
-import java.util.Map;
 
 import static com.sun.javafx.PlatformUtil.isWindows;
-import static ru.wpstuio.amorphine.utils.Formulae.*;
 
 public class Main {
 
-    //all this stuf is a test code to undestand how .mca files work.
+    //all this stuff is a test code to undestand how .mca files work.
     public static void main(String[] args) {
+
 
         File file;
         if (isWindows()) {
@@ -31,8 +30,20 @@ public class Main {
         RegionFile region = new RegionFile(file);
 
         Region rg = new Region(region);
+        Chunk[][] chunks = rg.getChunks();
 
-        /*
+        byte id = 54;
+        chunks[31][0].changeBlockId(-3, 64, 6,  id);
+
+        try {
+            DataOutputStream stream = region.getChunkDataOutputStream(31, 0);
+            NbtIo.write(chunks[31][0].getTag(), stream);
+            stream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+/*
+
 
         try {
 
