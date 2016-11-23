@@ -1,7 +1,7 @@
 # README #
 
 MRegioneer is a library for direct working with Minecraft world files.
-Thats not even an alpha version: the library is in early developing.
+Thats not even an alpha version: the library is in early developing. All functionality it currently has is represented in the only test ( change id for block with given coordinates... a little step for a man a big step for humanity, you know.
 
 ### How do I get set up? ###
 
