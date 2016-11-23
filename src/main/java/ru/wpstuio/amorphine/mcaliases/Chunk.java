@@ -53,12 +53,26 @@ public class Chunk {
         int local_y = localBlockFromBlock(y);
         int local_z = localBlockFromBlock(z);
 
+        int offset = local_y * 16 * 16 + local_z * 16 + local_x;
+
+        int section_index = sectionFromBlock(y);
+
+        ByteArrayTag block_bytes_tag = (ByteArrayTag) sections[section_index].get("Blocks");
+
+        block_bytes_tag.data[offset] = id;
+    }
+
+    public byte getBlockId(int x, int y, int z) {
+        int local_x = localBlockFromBlock(x);
+        int local_y = localBlockFromBlock(y);
+        int local_z = localBlockFromBlock(z);
+
         int section_index = sectionFromBlock(y);
 
         int offset = local_y * 16 * 16 + local_z * 16 + local_x;
 
         ByteArrayTag block_bytes_tag = (ByteArrayTag) sections[section_index].get("Blocks");
 
-        block_bytes_tag.data[offset] = id;
+        return block_bytes_tag.data[offset];
     }
 }
