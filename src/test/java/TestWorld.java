@@ -1,8 +1,6 @@
 /**
  * Created by amorphine on 23.11.16.
  */
-import static com.sun.javafx.PlatformUtil.isWindows;
-import static org.junit.Assert.*;
 
 import com.mojang.nbt.NbtIo;
 import net.minecraft.world.level.chunk.storage.RegionFile;
@@ -11,16 +9,29 @@ import org.ini4j.Profile;
 import org.junit.Test;
 import ru.wpstuio.amorphine.mcaliases.Chunk;
 import ru.wpstuio.amorphine.mcaliases.Region;
+import ru.wpstuio.amorphine.mcaliases.World;
 
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 public class TestWorld {
     @Test
     public void testAdd() {
 
+        World world;
+
+        try {
+            world = new World(new File ("/home/amorphine/mine-thermos/world/region"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /*
         String path_to_local_ini = "local_presets.ini";
         String path_to_ini = "presets.ini";
 
@@ -65,5 +76,6 @@ public class TestWorld {
 
         byte result = chunks[31][0].getBlockId(-3, 64, 6);
         assertTrue(id_to_make == result);
+        */
     }
 }
