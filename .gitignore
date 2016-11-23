@@ -1,3 +1,4 @@
 /target/
 MRegioneer.iml
 .idea/
+/src/test/resources/local_presets.ini
