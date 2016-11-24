@@ -25,6 +25,7 @@ public class Chunk {
         this.tag = tag;
 
         CompoundTag c_tag_level = (CompoundTag) tag.get("Level");
+
         IntTag x = (IntTag) c_tag_level.get("xPos");
         IntTag z = (IntTag) c_tag_level.get("zPos");
 
@@ -41,6 +42,14 @@ public class Chunk {
             }
             sections[i] = section;
         }
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getZ() {
+        return z;
     }
 
     public CompoundTag getTag() {

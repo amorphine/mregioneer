@@ -22,14 +22,26 @@ import static org.junit.Assert.fail;
 public class TestWorld {
     @Test
     public void testAdd() {
-
+/*
         World world;
 
         try {
+
             world = new World(new File ("/home/amorphine/mine-thermos/world/region"));
+
+            int[] coords = {-1, 0};
+
+            Region rg = world.getRegion(coords);
+            byte id_to_make = 16;
+
+            Chunk chunk = rg.getChunk(31, 0);
+
+            chunk.changeBlockId(-3, 64,6, id_to_make);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        */
 
         /*
         String path_to_local_ini = "local_presets.ini";

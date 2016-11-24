@@ -15,7 +15,7 @@ public class World {
 
     private File world_dir;
 
-    private HashMap<int[], RegionFile> region_files = new HashMap<int[], RegionFile>();
+    private RegionFile[][] region_files = new RegionFile[32][32];
 
     private ConcurrentMap<int[], Region> regions = new ConcurrentLinkedHashMap.Builder<int[], Region>()
             .maximumWeightedCapacity(2)
@@ -41,25 +41,28 @@ public class World {
                 String path_to_region = world_dir.getAbsolutePath() + "/" + file_name;
                 File region_file = new File(path_to_region);
 
-                int[] cords = {
-                        Integer.parseInt(splitted_file_name[1]),
-                        Integer.parseInt(splitted_file_name[2])
-                };
+                int x = Integer.parseInt(splitted_file_name[1]);
+                int z =Integer.parseInt(splitted_file_name[2]);
 
-                region_files.put(cords, new RegionFile(region_file));
+                region_files[x][z] = new RegionFile(region_file);
             }
         }
     }
+
+    /*
     public Region getRegion(int x, int z) {
+
         int[] coords = {x, z};
 
         if(regions.containsKey(coords)) {
             return  regions.get(coords);
         } else {
-            Region region = new Region(region_files.get(coords));
+            RegionFile region_file = region_files.get(coords);
+            Region region = new Region(region_file);
             regions.put(coords, region);
 
             return region;
         }
     }
+    */
 }
