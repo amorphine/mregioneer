@@ -51,10 +51,20 @@ public class Region {
         return chunks;
     }
 
+    /**
+     * Returns a chunk with given local coordinates from region
+     * @param cords
+     * @return
+     */
     public Chunk getChunk(Coordinates2d cords) {
         return chunks[cords.getX()][cords.getZ()];
     }
 
+    /**
+     * Saves given chunk data to region file;
+     * @param chunk
+     * @throws IOException
+     */
     public void saveChunk(Chunk chunk) throws IOException{
 
         int local_x = chunk.getLocalX();
@@ -68,7 +78,7 @@ public class Region {
     }
 
     /**
-     *
+     * Saves given tag as a chunk to mca-file;
      * @param cords
      * @param tag
      * @throws IOException
