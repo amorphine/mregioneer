@@ -14,12 +14,12 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class World {
 
-    private File world_dir;
+    private final File world_dir;
 
     private RegionFile[][] region_files = new RegionFile[32][32];
 
     private ConcurrentMap<Coordinates2d, Region> regions = new ConcurrentLinkedHashMap.Builder<Coordinates2d, Region>()
-            .maximumWeightedCapacity(2)
+            .maximumWeightedCapacity(10)
             .build();
 
     public World(File world_dir) throws IOException {
@@ -46,31 +46,27 @@ public class World {
 
                 int x = Integer.parseInt(splitted_file_name[1]);
                 int z =Integer.parseInt(splitted_file_name[2]);
-                Coordinates2d cords = new Coordinates2d(x, z);
+
                 region_files[x][z] = region_file;
-
-                Region region = new Region(region_file);
-
-                regions.putIfAbsent(cords, region);
-
             }
         }
     }
 
-    /*
+
     public Region getRegion(int x, int z) {
 
-        int[] coords = {x, z};
+        Coordinates2d cords = new Coordinates2d(x, z);
 
-        if(regions.containsKey(coords)) {
-            return  regions.get(coords);
+        if(regions.containsKey(cords)) {
+            return  regions.get(cords);
         } else {
-            RegionFile region_file = region_files.get(coords);
+            RegionFile region_file = region_files[x][z];
+
             Region region = new Region(region_file);
-            regions.put(coords, region);
+            regions.put(cords, region);
 
             return region;
         }
     }
-    */
+
 }
