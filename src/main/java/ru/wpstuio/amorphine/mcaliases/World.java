@@ -54,6 +54,12 @@ public class World {
         }
     }
 
+    /**
+     * Returns a region with specified coordinates from cache. If it is not in the cache, it is put there.
+     * @param x
+     * @param z
+     * @return
+     */
     public Region getRegion(int x, int z) {
 
         Coordinates2d cords = new Coordinates2d(x, z);

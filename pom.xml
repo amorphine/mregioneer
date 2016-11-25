@@ -64,6 +64,6 @@
         </testResources>
 
         <directory>target</directory>
-        <finalName>MRegioneer-1.0-SNAPSHOT</finalName>
+        <finalName>MRegioneer-0.1-SNAPSHOT</finalName>
     </build>
 </project>

@@ -4,7 +4,6 @@ package ru.wpstuio.amorphine.mcaliases;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.NbtIo;
 import net.minecraft.world.level.chunk.storage.RegionFile;
-import org.apache.commons.collections4.map.LRUMap;
 import ru.wpstuio.amorphine.utils.Coordinates2d;
 import ru.wpstuio.amorphine.utils.Formulae;
 
@@ -53,7 +52,7 @@ public class Region {
 
     /**
      * Returns a chunk with given local coordinates from region
-     * @param cords
+     * @param cords XZ coordinates for chunk
      * @return
      */
     public Chunk getChunk(Coordinates2d cords) {
@@ -62,7 +61,7 @@ public class Region {
 
     /**
      * Saves given chunk data to region file;
-     * @param chunk
+     * @param chunk chunk to be saved to mca-file
      * @throws IOException
      */
     public void saveChunk(Chunk chunk) throws IOException{
@@ -79,7 +78,7 @@ public class Region {
 
     /**
      * Saves given tag as a chunk to mca-file;
-     * @param cords
+     * @param cords local XZ coordinates the chunk will be saved to in mca file
      * @param tag
      * @throws IOException
      */
