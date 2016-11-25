@@ -5,6 +5,8 @@ import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.NbtIo;
 import net.minecraft.world.level.chunk.storage.RegionFile;
 import org.apache.commons.collections4.map.LRUMap;
+import ru.wpstuio.amorphine.utils.Coordinates2d;
+import ru.wpstuio.amorphine.utils.Formulae;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -34,9 +36,11 @@ public class Region {
                     tag = null;
                 }
 
+                Coordinates2d local_cords = new Coordinates2d(i, j);
+
                 Chunk chunk = null;
                 if (tag != null)
-                    chunk = new Chunk(tag);
+                    chunk = new Chunk(local_cords, tag);
 
                 this.chunks[i][j] = chunk;
             }
@@ -47,14 +51,39 @@ public class Region {
         return chunks;
     }
 
-    public Chunk getChunk(int x, int z) {
-        return chunks[x][z];
+    public Chunk getChunk(Coordinates2d cords) {
+        return chunks[cords.getX()][cords.getZ()];
     }
 
     public void saveChunk(Chunk chunk) throws IOException{
-        DataOutputStream stream = region_file.getChunkDataOutputStream(chunk.getX(), chunk.getZ());
 
-        NbtIo.write(chunks[chunk.getX()][chunk.getZ()].getTag(), stream);
+        int local_x = chunk.getLocalX();
+        int local_z = chunk.getLocalZ();
+
+        DataOutputStream stream = region_file.getChunkDataOutputStream(local_x, local_z);
+
+        NbtIo.write(chunks[local_x][local_z].getTag(), stream);
+
+        stream.close();
+    }
+
+    /**
+     *
+     * @param cords
+     * @param tag
+     * @throws IOException
+     */
+    public void saveTagAsChunk(Coordinates2d cords, CompoundTag tag) throws IOException{
+
+        int global_x = cords.getX();
+        int global_z = cords.getZ();
+
+        int local_x = Formulae.localChunkFromChunk(global_x);
+        int local_z = Formulae.localChunkFromChunk(global_z);
+
+        DataOutputStream stream = region_file.getChunkDataOutputStream(local_x, local_z);
+
+        NbtIo.write(chunks[local_x][local_z].getTag(), stream);
 
         stream.close();
     }

@@ -2,6 +2,7 @@ package ru.wpstuio.amorphine.mcaliases;
 
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
 import net.minecraft.world.level.chunk.storage.RegionFile;
+import ru.wpstuio.amorphine.utils.Coordinates2d;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class World {
 
     private RegionFile[][] region_files = new RegionFile[32][32];
 
-    private ConcurrentMap<int[], Region> regions = new ConcurrentLinkedHashMap.Builder<int[], Region>()
+    private ConcurrentMap<Coordinates2d, Region> regions = new ConcurrentLinkedHashMap.Builder<Coordinates2d, Region>()
             .maximumWeightedCapacity(2)
             .build();
 
@@ -39,12 +40,19 @@ public class World {
                 }
 
                 String path_to_region = world_dir.getAbsolutePath() + "/" + file_name;
-                File region_file = new File(path_to_region);
+                File mca_file = new File(path_to_region);
+                RegionFile region_file = new RegionFile(mca_file);
+
 
                 int x = Integer.parseInt(splitted_file_name[1]);
                 int z =Integer.parseInt(splitted_file_name[2]);
+                Coordinates2d cords = new Coordinates2d(x, z);
+                region_files[x][z] = region_file;
 
-                region_files[x][z] = new RegionFile(region_file);
+                Region region = new Region(region_file);
+
+                regions.putIfAbsent(cords, region);
+
             }
         }
     }
