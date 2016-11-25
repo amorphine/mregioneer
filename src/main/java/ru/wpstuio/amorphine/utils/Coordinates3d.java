@@ -38,4 +38,21 @@ public class Coordinates3d {
     public int hashCode() {
         return this.coordinates_as_string.hashCode();
     }
+
+    public boolean equals(Object obj) {
+        if(obj == this)
+            return true;
+
+
+        if(obj == null)
+            return false;
+
+        if(!(getClass() == obj.getClass()))
+            return false;
+        else
+        {
+            Coordinates3d tmp = (Coordinates3d)obj;
+            return tmp.toString().equals(this.toString());
+        }
+    }
 }

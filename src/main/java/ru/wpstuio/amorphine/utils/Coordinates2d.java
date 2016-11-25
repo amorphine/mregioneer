@@ -28,7 +28,25 @@ public class Coordinates2d {
     public String toString() {
         return coordinates_as_string;
     }
+
     public int hashCode() {
         return this.coordinates_as_string.hashCode();
+    }
+
+    public boolean equals(Object obj) {
+        if(obj == this)
+            return true;
+
+
+        if(obj == null)
+            return false;
+
+        if(!(getClass() == obj.getClass()))
+            return false;
+        else
+        {
+            Coordinates2d tmp = (Coordinates2d)obj;
+            return tmp.toString().equals(this.toString());
+        }
     }
 }
