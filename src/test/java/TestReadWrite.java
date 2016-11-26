@@ -2,6 +2,7 @@
  * Created by amorphine on 23.11.16.
  */
 
+import org.ini4j.Ini;
 import org.junit.Test;
 import ru.wpstuio.amorphine.mcaliases.Chunk;
 import ru.wpstuio.amorphine.mcaliases.Region;
@@ -21,7 +22,14 @@ public class TestReadWrite {
         byte id_to_make = 26;
 
         try {
-            world = new World(new File ("/home/amorphine/mine-thermos/world/region"));
+
+            //initializing path to region folder
+            String presets_url = TestReadWrite.class.getClassLoader().getResource("local_presets.ini").getPath();
+            Ini ini = new Ini(new File(presets_url));
+            String path_to_mca_folder = ini.get("paths", "world_path", String.class);
+
+
+            world = new World(new File (path_to_mca_folder));
             Region rg = world.getRegion(-1, 0);
 
             Coordinates2d chunk_cords = new Coordinates2d(31, 0);
@@ -30,7 +38,7 @@ public class TestReadWrite {
             chunk.changeBlockId(-3, 64,6, id_to_make);
             rg.saveChunk(chunk);
 
-            world = new World(new File ("/home/amorphine/mine-thermos/world/region"));
+            world = new World(new File (path_to_mca_folder));
             rg = world.getRegion(-1, 0);
             chunk = rg.getChunk(chunk_cords);
             byte id = chunk.getBlockId(-3, 64,6);
