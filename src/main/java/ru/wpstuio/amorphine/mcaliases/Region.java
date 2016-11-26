@@ -69,7 +69,7 @@ public class Region {
 
         DataOutputStream stream = region_file.getChunkDataOutputStream(local_x, local_z);
 
-        NbtIo.write(chunks[local_x][local_z].getTag(), stream);
+        NbtIo.write(chunk.getTag(), stream);
 
         stream.close();
     }
