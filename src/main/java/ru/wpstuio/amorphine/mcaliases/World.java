@@ -11,9 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 
-/**
- * Created by amorphine on 21.11.16.
- */
+
 public class World {
 
     private final File world_dir;

@@ -2,9 +2,7 @@ package ru.wpstuio.amorphine.mcaliases;
 
 import com.mojang.nbt.CompoundTag;
 
-/**
- * Created by amorphine on 22.11.16.
- */
+
 public class Section {
     private byte index;
     private CompoundTag tag;

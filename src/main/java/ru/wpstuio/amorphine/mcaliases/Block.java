@@ -1,8 +1,6 @@
 package ru.wpstuio.amorphine.mcaliases;
 
-/**
- * Created by amorphine on 21.11.16.
- */
+
 public class Block {
     private int x;
     private int z;

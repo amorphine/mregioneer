@@ -11,9 +11,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-/**
- * Created by amorphine on 21.11.16.
- */
+
 public class Region {
 
     private RegionFile region_file;

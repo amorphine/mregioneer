@@ -10,9 +10,7 @@ import ru.wpstuio.amorphine.utils.Coordinates2d;
 import static ru.wpstuio.amorphine.utils.Formulae.localBlockFromBlock;
 import static ru.wpstuio.amorphine.utils.Formulae.sectionFromBlock;
 
-/**
- * Created by amorphine on 21.11.16.
- */
+
 public class Chunk {
 
     private CompoundTag tag;

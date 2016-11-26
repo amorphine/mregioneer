@@ -2,9 +2,7 @@ package ru.wpstuio.amorphine.mcaliases;
 
 import com.flowpowered.nbt.CompoundTag;
 
-/**
- * Created by amorphine on 21.11.16.
- */
+
 public class TileEntity {
     private CompoundTag tag;
 
