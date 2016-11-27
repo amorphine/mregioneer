@@ -6,6 +6,7 @@ import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.IntTag;
 import com.mojang.nbt.ListTag;
 import ru.wpstuio.amorphine.utils.Coordinates2d;
+import ru.wpstuio.amorphine.utils.Coordinates3d;
 
 import static ru.wpstuio.amorphine.utils.Formulae.localBlockFromBlock;
 import static ru.wpstuio.amorphine.utils.Formulae.sectionFromBlock;
@@ -85,6 +86,20 @@ public class Chunk {
         int offset = local_y * 16 * 16 + local_z * 16 + local_x;
 
         int section_index = sectionFromBlock(y);
+
+        ByteArrayTag block_bytes_tag = (ByteArrayTag) sections[section_index].get("Blocks");
+
+        block_bytes_tag.data[offset] = id;
+    }
+
+    public void changeBlockId(Coordinates3d cords, byte id) {
+        int local_x = localBlockFromBlock(cords.getX());
+        int local_y = localBlockFromBlock(cords.getY());
+        int local_z = localBlockFromBlock(cords.getZ());
+
+        int offset = local_y * 16 * 16 + local_z * 16 + local_x;
+
+        int section_index = sectionFromBlock(cords.getY());
 
         ByteArrayTag block_bytes_tag = (ByteArrayTag) sections[section_index].get("Blocks");
 

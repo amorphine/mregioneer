@@ -1,47 +1,42 @@
-/**
- * Created by amorphine on 23.11.16.
- */
-
 import org.ini4j.Ini;
 import org.junit.Test;
-import ru.wpstuio.amorphine.mcaliases.Chunk;
-import ru.wpstuio.amorphine.mcaliases.Region;
 import ru.wpstuio.amorphine.mcaliases.World;
-import ru.wpstuio.amorphine.utils.Coordinates2d;
+import ru.wpstuio.amorphine.utils.Coordinates3d;
 
 import java.io.File;
 import java.io.IOException;
 
 import static org.junit.Assert.assertTrue;
 
-public class TestReadWrite {
+
+public class TestReadWrite2 {
     @Test
     public void testAdd() {
 
         World world;
-        byte id_to_make = 3;
+        byte id_to_make = 13;
 
         try {
-
             //initializing path to region folder
             String presets_url = TestReadWrite.class.getClassLoader().getResource("local_presets.ini").getPath();
             Ini ini = new Ini(new File(presets_url));
             String path_to_mca_folder = ini.get("paths", "world_path", String.class);
 
+            world = new World(new File (path_to_mca_folder));
+
+            Coordinates3d cords;
+            for(int inty = 66; inty < 100; inty++){
+                for(int intz = -10; intz < 10; intz++){
+                    for(int intx = -10; intx < 10; intx++){
+                        world.changeBlockID(new Coordinates3d(intx, inty, intz), id_to_make);
+                    }
+                }
+            }
+            world.save();
 
             world = new World(new File (path_to_mca_folder));
-            Region rg = world.getRegion(-1, 0);
-
-            Coordinates2d chunk_cords = new Coordinates2d(31, 0);
-
-            Chunk chunk = rg.getChunk(chunk_cords);
-            chunk.changeBlockId(-3, 64,6, id_to_make);
-            rg.saveChunk(chunk);
-
-            world = new World(new File (path_to_mca_folder));
-            rg = world.getRegion(-1, 0);
-            chunk = rg.getChunk(chunk_cords);
-            byte id = chunk.getBlockId(-3, 64,6);
+            cords = new Coordinates3d(1, 66 ,1);
+            byte id = world.getBlockId(cords);
 
             assertTrue(id == id_to_make);
 

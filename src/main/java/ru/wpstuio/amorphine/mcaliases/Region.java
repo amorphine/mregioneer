@@ -5,16 +5,18 @@ import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.NbtIo;
 import net.minecraft.world.level.chunk.storage.RegionFile;
 import ru.wpstuio.amorphine.utils.Coordinates2d;
+import ru.wpstuio.amorphine.utils.Coordinates3d;
 import ru.wpstuio.amorphine.utils.Formulae;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import static ru.wpstuio.amorphine.utils.Formulae.localChunkFromBlock;
 
 public class Region {
 
-    private RegionFile region_file;
+    private final RegionFile region_file;
 
     private Chunk chunks[][] = new Chunk[32][32];
 
@@ -93,5 +95,55 @@ public class Region {
         NbtIo.write(tag, stream);
 
         stream.close();
+    }
+
+    /**
+     * Saves all property chunks to region file
+     */
+    public void save() throws IOException {
+        for(int x = 31; x >= 0; x--) {
+            for (int z = 31; z >= 0; z--) {
+
+                Chunk chunk = chunks[x][z];
+
+                if (chunk == null)
+                        continue;
+
+                CompoundTag tag = chunk.getTag();
+
+                DataOutputStream stream = region_file.getChunkDataOutputStream(x, z);
+
+                NbtIo.write(tag, stream);
+
+                stream.close();
+            }
+        }
+    }
+
+    public void changeBlockId(Coordinates3d cords, byte id) throws IOException {
+        int block_global_x = cords.getX();
+        int block_global_z = cords.getZ();
+
+        int chunk_local_x = localChunkFromBlock(block_global_x);
+        int chunk_local_z = localChunkFromBlock(block_global_z);
+
+        Chunk chunk = chunks[chunk_local_x][chunk_local_z];
+        chunk.changeBlockId(cords, id);
+
+        this.save();
+    }
+
+    public byte getBlockId(Coordinates3d cords) {
+        int block_global_x = cords.getX();
+        int block_global_z = cords.getZ();
+        int block_global_y = cords.getY();
+
+        int chunk_local_x = localChunkFromBlock(block_global_x);
+        int chunk_local_z = localChunkFromBlock(block_global_z);
+
+        Chunk chunk = chunks[chunk_local_x][chunk_local_z];
+        byte id = chunk.getBlockId(block_global_x, block_global_y, block_global_z);
+
+        return id;
     }
 }

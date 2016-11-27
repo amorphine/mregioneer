@@ -1,9 +1,9 @@
 package ru.wpstuio.amorphine.mcaliases;
 
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import net.minecraft.world.level.chunk.storage.RegionFile;
 import ru.wpstuio.amorphine.utils.Coordinates2d;
+import ru.wpstuio.amorphine.utils.Coordinates3d;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,12 +11,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 
+import static ru.wpstuio.amorphine.utils.Formulae.regionFromBlock;
+
 
 public class World {
 
     private final File world_dir;
 
-    Map<Coordinates2d, RegionFile> region_files = new HashMap<Coordinates2d, RegionFile>();
+    private Map<Coordinates2d, RegionFile> region_files = new HashMap<Coordinates2d, RegionFile>();
 
     private ConcurrentMap<Coordinates2d, Region> regions = new ConcurrentLinkedHashMap.Builder<Coordinates2d, Region>()
             .maximumWeightedCapacity(10)
@@ -52,6 +54,13 @@ public class World {
         }
     }
 
+    public void save() throws IOException {
+        for(Map.Entry entry: regions.entrySet()) {
+            Region region = (Region) entry.getValue();
+            region.save();
+        }
+    }
+
     /**
      * Returns a region with specified coordinates from cache. If it is not in the cache, it is put there.
      * @param x
@@ -72,5 +81,21 @@ public class World {
 
             return region;
         }
+    }
+
+    public void changeBlockID(Coordinates3d cords, byte id) throws IOException {
+        int region_x = regionFromBlock(cords.getX());
+        int region_z = regionFromBlock(cords.getZ());
+
+        Region region = this.getRegion(region_x, region_z);
+        region.changeBlockId(cords, id);
+    }
+
+    public byte getBlockId(Coordinates3d cords) {
+        int region_x = regionFromBlock(cords.getX());
+        int region_z = regionFromBlock(cords.getZ());
+
+        Region region = this.getRegion(region_x, region_z);
+        return region.getBlockId(cords);
     }
 }
