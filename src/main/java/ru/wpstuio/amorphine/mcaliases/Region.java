@@ -130,7 +130,6 @@ public class Region {
         Chunk chunk = chunks[chunk_local_x][chunk_local_z];
         chunk.changeBlockId(cords, id);
 
-        this.save();
     }
 
     public byte getBlockId(Coordinates3d cords) {
