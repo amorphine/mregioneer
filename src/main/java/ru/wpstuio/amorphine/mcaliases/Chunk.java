@@ -22,7 +22,7 @@ public class Chunk {
     private final int local_x;
     private final int local_z;
 
-    private CompoundTag[] sections = new CompoundTag[15];
+    private Section[] sections = new Section[16];
 
     public Chunk(Coordinates2d local_cords, CompoundTag tag) {
         this.tag = tag;
@@ -40,9 +40,11 @@ public class Chunk {
 
         ListTag sections_tag =  (ListTag) c_tag_level.get("Sections");
         for(int i = 0; i <= 15; i++){
-            CompoundTag section;
+            Section section;
+            CompoundTag section_tag;
             try{
-                section = (CompoundTag) sections_tag.get(i);
+                section_tag = (CompoundTag) sections_tag.get(i);
+                section = new Section((byte)i, section_tag);
             } catch (IndexOutOfBoundsException e) {
                 continue;
             }
@@ -70,6 +72,14 @@ public class Chunk {
         return tag;
     }
 
+    public Section getSection(byte index) {
+        if(sections[index] == null) {
+            sections[index] = new Section(index);
+        }
+
+        return sections[index];
+    }
+
     /**
      * Changes specified block basic id to with the given one
      * @param x represents EAST - SOUTH axe
@@ -85,9 +95,10 @@ public class Chunk {
 
         int offset = local_y * 16 * 16 + local_z * 16 + local_x;
 
-        int section_index = sectionFromBlock(y);
+        byte section_index = (byte) sectionFromBlock(y);
+        Section section = getSection(section_index);
 
-        ByteArrayTag block_bytes_tag = (ByteArrayTag) sections[section_index].get("Blocks");
+        ByteArrayTag block_bytes_tag = (ByteArrayTag) section.get("Blocks");
 
         block_bytes_tag.data[offset] = id;
     }
@@ -99,9 +110,10 @@ public class Chunk {
 
         int offset = local_y * 16 * 16 + local_z * 16 + local_x;
 
-        int section_index = sectionFromBlock(cords.getY());
+        byte section_index = (byte) sectionFromBlock(cords.getY());
+        Section section = getSection(section_index);
 
-        ByteArrayTag block_bytes_tag = (ByteArrayTag) sections[section_index].get("Blocks");
+        ByteArrayTag block_bytes_tag = (ByteArrayTag) section.get("Blocks");
 
         block_bytes_tag.data[offset] = id;
     }
@@ -122,8 +134,11 @@ public class Chunk {
 
         int offset = local_y * 16 * 16 + local_z * 16 + local_x;
 
-        ByteArrayTag block_bytes_tag = (ByteArrayTag) sections[section_index].get("Blocks");
-
-        return block_bytes_tag.data[offset];
+        try {
+            ByteArrayTag block_bytes_tag = (ByteArrayTag) sections[section_index].get("Blocks");
+            return block_bytes_tag.data[offset];
+        } catch (NullPointerException e) {
+            return (byte) 0;
+        }
     }
 }
