@@ -103,6 +103,11 @@ public class Chunk {
         block_bytes_tag.data[offset] = id;
     }
 
+    /**
+     * Writes main block id with given coordinates
+     * @param cords
+     * @param id
+     */
     public void changeBlockId(Coordinates3d cords, byte id) {
         int local_x = localBlockFromBlock(cords.getX());
         int local_y = localBlockFromBlock(cords.getY());

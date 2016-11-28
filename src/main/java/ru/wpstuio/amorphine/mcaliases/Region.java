@@ -120,6 +120,12 @@ public class Region {
         }
     }
 
+    /**
+     * Writes block id with given coordinates
+     * @param cords
+     * @param id
+     * @throws IOException
+     */
     public void changeBlockId(Coordinates3d cords, byte id) throws IOException {
         int block_global_x = cords.getX();
         int block_global_z = cords.getZ();
@@ -132,6 +138,11 @@ public class Region {
 
     }
 
+    /**
+     * Returns block id with given coordinates
+     * @param cords
+     * @return
+     */
     public byte getBlockId(Coordinates3d cords) {
         int block_global_x = cords.getX();
         int block_global_z = cords.getZ();

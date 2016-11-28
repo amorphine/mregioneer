@@ -12,13 +12,6 @@ public class Section {
     private final byte index;
     private CompoundTag tag;
 
-    public byte getIndex() {
-        return index;
-    }
-
-    public CompoundTag getTag() {
-        return tag;
-    }
 
     public Section(byte index, CompoundTag tag) {
         this.index = index;
@@ -46,6 +39,19 @@ public class Section {
         this.tag = main_tag;
     }
 
+    public byte getIndex() {
+        return index;
+    }
+
+    public CompoundTag getTag() {
+        return tag;
+    }
+
+    /**
+     * Returns tag with given name
+     * @param name string name of the tag to be returned
+     * @return
+     */
     public Tag get(String name) {
         return this.tag.get(name);
     }

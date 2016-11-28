@@ -54,6 +54,10 @@ public class World {
         }
     }
 
+    /**
+     * Save all cashed regions to their files
+     * @throws IOException
+     */
     public void save() throws IOException {
         for(Map.Entry entry: regions.entrySet()) {
             Region region = (Region) entry.getValue();
@@ -83,6 +87,12 @@ public class World {
         }
     }
 
+    /**
+     * Changes specified block basic id to with the given one
+     * @param cords
+     * @param id
+     * @throws IOException
+     */
     public void changeBlockID(Coordinates3d cords, byte id) throws IOException {
         int region_x = regionFromBlock(cords.getX());
         int region_z = regionFromBlock(cords.getZ());
@@ -91,6 +101,11 @@ public class World {
         region.changeBlockId(cords, id);
     }
 
+    /**
+     * Returns id of the block with specified XYZ coordinates
+     * @param cords
+     * @return
+     */
     public byte getBlockId(Coordinates3d cords) {
         int region_x = regionFromBlock(cords.getX());
         int region_z = regionFromBlock(cords.getZ());
