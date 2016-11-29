@@ -1,15 +1,13 @@
-package ru.wpstuio.amorphine.mcaliases;
+package mregioneer.mcaliases;
 
 
 import com.mojang.nbt.ByteArrayTag;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.IntTag;
 import com.mojang.nbt.ListTag;
-import ru.wpstuio.amorphine.utils.Coordinates2d;
-import ru.wpstuio.amorphine.utils.Coordinates3d;
-
-import static ru.wpstuio.amorphine.utils.Formulae.localBlockFromBlock;
-import static ru.wpstuio.amorphine.utils.Formulae.sectionFromBlock;
+import mregioneer.utils.Coordinates2d;
+import mregioneer.utils.Coordinates3d;
+import mregioneer.utils.Formulae;
 
 
 public class Chunk {
@@ -89,13 +87,13 @@ public class Chunk {
      */
     public void changeBlockId(int x, int y, int z, byte id) {
 
-        int local_x = localBlockFromBlock(x);
-        int local_y = localBlockFromBlock(y);
-        int local_z = localBlockFromBlock(z);
+        int local_x = Formulae.localBlockFromBlock(x);
+        int local_y = Formulae.localBlockFromBlock(y);
+        int local_z = Formulae.localBlockFromBlock(z);
 
         int offset = local_y * 16 * 16 + local_z * 16 + local_x;
 
-        byte section_index = (byte) sectionFromBlock(y);
+        byte section_index = (byte) Formulae.sectionFromBlock(y);
         Section section = getSection(section_index);
 
         ByteArrayTag block_bytes_tag = (ByteArrayTag) section.get("Blocks");
@@ -109,13 +107,13 @@ public class Chunk {
      * @param id
      */
     public void changeBlockId(Coordinates3d cords, byte id) {
-        int local_x = localBlockFromBlock(cords.getX());
-        int local_y = localBlockFromBlock(cords.getY());
-        int local_z = localBlockFromBlock(cords.getZ());
+        int local_x = Formulae.localBlockFromBlock(cords.getX());
+        int local_y = Formulae.localBlockFromBlock(cords.getY());
+        int local_z = Formulae.localBlockFromBlock(cords.getZ());
 
         int offset = local_y * 16 * 16 + local_z * 16 + local_x;
 
-        byte section_index = (byte) sectionFromBlock(cords.getY());
+        byte section_index = (byte) Formulae.sectionFromBlock(cords.getY());
         Section section = getSection(section_index);
 
         ByteArrayTag block_bytes_tag = (ByteArrayTag) section.get("Blocks");
@@ -131,11 +129,11 @@ public class Chunk {
      * @return byte of the basic id of the block
      */
     public byte getBlockId(int x, int y, int z) {
-        int local_x = localBlockFromBlock(x);
-        int local_y = localBlockFromBlock(y);
-        int local_z = localBlockFromBlock(z);
+        int local_x = Formulae.localBlockFromBlock(x);
+        int local_y = Formulae.localBlockFromBlock(y);
+        int local_z = Formulae.localBlockFromBlock(z);
 
-        int section_index = sectionFromBlock(y);
+        int section_index = Formulae.sectionFromBlock(y);
 
         int offset = local_y * 16 * 16 + local_z * 16 + local_x;
 

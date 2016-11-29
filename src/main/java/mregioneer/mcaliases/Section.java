@@ -1,4 +1,4 @@
-package ru.wpstuio.amorphine.mcaliases;
+package mregioneer.mcaliases;
 
 import com.mojang.nbt.ByteArrayTag;
 import com.mojang.nbt.ByteTag;

@@ -1,4 +1,4 @@
-package ru.wpstuio.amorphine.exception;
+package mregioneer.exception;
 
 public class EmptySection extends Exception {
 

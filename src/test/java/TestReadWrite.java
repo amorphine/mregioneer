@@ -4,10 +4,10 @@
 
 import org.ini4j.Ini;
 import org.junit.Test;
-import ru.wpstuio.amorphine.mcaliases.Chunk;
-import ru.wpstuio.amorphine.mcaliases.Region;
-import ru.wpstuio.amorphine.mcaliases.World;
-import ru.wpstuio.amorphine.utils.Coordinates2d;
+import mregioneer.mcaliases.Chunk;
+import mregioneer.mcaliases.Region;
+import mregioneer.mcaliases.World;
+import mregioneer.utils.Coordinates2d;
 
 import java.io.File;
 import java.io.IOException;

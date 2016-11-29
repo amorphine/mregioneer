@@ -1,4 +1,4 @@
-package ru.wpstuio.amorphine.mcaliases;
+package mregioneer.mcaliases;
 
 import com.flowpowered.nbt.CompoundTag;
 

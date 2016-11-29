@@ -1,9 +1,9 @@
-package ru.wpstuio.amorphine.mcaliases;
+package mregioneer.mcaliases;
 
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
+import mregioneer.utils.Coordinates3d;
 import net.minecraft.world.level.chunk.storage.RegionFile;
-import ru.wpstuio.amorphine.utils.Coordinates2d;
-import ru.wpstuio.amorphine.utils.Coordinates3d;
+import mregioneer.utils.Coordinates2d;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 
-import static ru.wpstuio.amorphine.utils.Formulae.regionFromBlock;
+import static mregioneer.utils.Formulae.regionFromBlock;
 
 
 public class World {

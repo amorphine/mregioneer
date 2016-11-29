@@ -1,7 +1,7 @@
-package ru.wpstuio.amorphine.mcaliases;
+package mregioneer.mcaliases;
 
 
-import ru.wpstuio.amorphine.utils.Coordinates3d;
+import mregioneer.utils.Coordinates3d;
 
 public class Block {
     private final int x;

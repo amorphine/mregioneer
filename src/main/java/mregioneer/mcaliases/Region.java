@@ -1,18 +1,18 @@
-package ru.wpstuio.amorphine.mcaliases;
+package mregioneer.mcaliases;
 
 
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.NbtIo;
+import mregioneer.utils.Coordinates3d;
 import net.minecraft.world.level.chunk.storage.RegionFile;
-import ru.wpstuio.amorphine.utils.Coordinates2d;
-import ru.wpstuio.amorphine.utils.Coordinates3d;
-import ru.wpstuio.amorphine.utils.Formulae;
+import mregioneer.utils.Coordinates2d;
+import mregioneer.utils.Formulae;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import static ru.wpstuio.amorphine.utils.Formulae.localChunkFromBlock;
+import static mregioneer.utils.Formulae.localChunkFromBlock;
 
 public class Region {
 

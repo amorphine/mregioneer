@@ -1,7 +1,7 @@
 import org.ini4j.Ini;
 import org.junit.Test;
-import ru.wpstuio.amorphine.mcaliases.World;
-import ru.wpstuio.amorphine.utils.Coordinates3d;
+import mregioneer.mcaliases.World;
+import mregioneer.utils.Coordinates3d;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class TestReadWrite2 {
     public void testAdd() {
 
         World world;
-        byte id_to_make = 13;
+        byte id_to_make = 14;
 
         try {
             //initializing path to region folder
@@ -25,7 +25,7 @@ public class TestReadWrite2 {
             world = new World(new File (path_to_mca_folder));
 
             Coordinates3d cords;
-            for(int inty = 66; inty < 100; inty++){
+            for(int inty = 6; inty < 100; inty++){
                 for(int intz = -10; intz < 10; intz++){
                     for(int intx = -10; intx < 10; intx++){
                         world.changeBlockID(new Coordinates3d(intx, inty, intz), id_to_make);

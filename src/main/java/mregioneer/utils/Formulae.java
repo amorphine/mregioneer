@@ -1,4 +1,4 @@
-package ru.wpstuio.amorphine.utils;
+package mregioneer.utils;
 
 /**
  * Created by amorphine on 20.11.16.

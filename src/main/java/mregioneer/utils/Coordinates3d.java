@@ -1,24 +1,30 @@
-package ru.wpstuio.amorphine.utils;
+package mregioneer.utils;
 
 /**
  * The class has been created to use as a key for hash maps containing chunks, regions and so on.
  * All new inctanses of the class with simular params returns the same hash code
  */
-public class Coordinates2d {
+public class Coordinates3d {
     private final int x;
+    private final int y;
     private final int z;
 
     private final String coordinates_as_string;
 
-    public Coordinates2d(int x, int z) {
+    public Coordinates3d(int x, int y, int z) {
         this.x = x;
+        this.y = y;
         this.z = z;
 
-        this.coordinates_as_string = "(" + x + ";" + z + ")";
+        this.coordinates_as_string = "(" + x + ";" + y + ";" + z + ")";
     }
 
     public int getX() {
         return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public int getZ() {
@@ -45,7 +51,7 @@ public class Coordinates2d {
             return false;
         else
         {
-            Coordinates2d tmp = (Coordinates2d)obj;
+            Coordinates3d tmp = (Coordinates3d)obj;
             return tmp.toString().equals(this.toString());
         }
     }
