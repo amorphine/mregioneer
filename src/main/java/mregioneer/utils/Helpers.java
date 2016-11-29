@@ -1,8 +1,6 @@
 package mregioneer.utils;
 
-/**
- * Created by amorphine on 23.11.16.
- */
+
 public class Helpers {
     /**
      * Helps to calculate offset for Add and Data sections which are known to keep 4 bits for a block

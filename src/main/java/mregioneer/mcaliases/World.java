@@ -113,4 +113,20 @@ public class World {
         Region region = this.getRegion(region_x, region_z);
         return region.getBlockId(cords);
     }
+
+    public byte getBlockAddId(Coordinates3d cords) {
+        int region_x = regionFromBlock(cords.getX());
+        int region_z = regionFromBlock(cords.getZ());
+
+        Region region = this.getRegion(region_x, region_z);
+        return region.getBlockAddId(cords);
+    }
+
+    public Block getBlock(Coordinates3d cords) {
+        int region_x = regionFromBlock(cords.getX());
+        int region_z = regionFromBlock(cords.getZ());
+
+        Region region = this.getRegion(region_x, region_z);
+        return region.getBlock(cords);
+    }
 }

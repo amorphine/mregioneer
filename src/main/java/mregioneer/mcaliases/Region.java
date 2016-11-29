@@ -156,4 +156,30 @@ public class Region {
 
         return id;
     }
+
+    public byte getBlockAddId(Coordinates3d cords) {
+        int block_global_x = cords.getX();
+        int block_global_z = cords.getZ();
+        int block_global_y = cords.getY();
+
+        int chunk_local_x = localChunkFromBlock(block_global_x);
+        int chunk_local_z = localChunkFromBlock(block_global_z);
+
+        Chunk chunk = chunks[chunk_local_x][chunk_local_z];
+        byte id = chunk.getBlockAddId(block_global_x, block_global_y, block_global_z);
+
+        return id;
+    }
+
+    public Block getBlock(Coordinates3d cords) {
+        int block_global_x = cords.getX();
+        int block_global_z = cords.getZ();
+
+        int chunk_local_x = localChunkFromBlock(block_global_x);
+        int chunk_local_z = localChunkFromBlock(block_global_z);
+
+        Chunk chunk = chunks[chunk_local_x][chunk_local_z];
+
+        return chunk.getBlock(cords);
+    }
 }

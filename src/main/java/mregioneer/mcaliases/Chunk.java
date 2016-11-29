@@ -9,6 +9,8 @@ import mregioneer.utils.Coordinates2d;
 import mregioneer.utils.Coordinates3d;
 import mregioneer.utils.Formulae;
 
+import static mregioneer.utils.Formulae.sectionFromBlock;
+
 
 public class Chunk {
 
@@ -93,7 +95,7 @@ public class Chunk {
 
         int offset = local_y * 16 * 16 + local_z * 16 + local_x;
 
-        byte section_index = (byte) Formulae.sectionFromBlock(y);
+        byte section_index = (byte) sectionFromBlock(y);
         Section section = getSection(section_index);
 
         ByteArrayTag block_bytes_tag = (ByteArrayTag) section.get("Blocks");
@@ -113,7 +115,7 @@ public class Chunk {
 
         int offset = local_y * 16 * 16 + local_z * 16 + local_x;
 
-        byte section_index = (byte) Formulae.sectionFromBlock(cords.getY());
+        byte section_index = (byte) sectionFromBlock(cords.getY());
         Section section = getSection(section_index);
 
         ByteArrayTag block_bytes_tag = (ByteArrayTag) section.get("Blocks");
@@ -123,7 +125,7 @@ public class Chunk {
 
     /**
      * Returns id of the block with specified XYZ coordinates
-     * @param x represents EAST - SOUTH axe
+     * @param x represents EAST - WEST axe
      * @param y represents height axe
      * @param z represents NORTH - SOUTH axe
      * @return byte of the basic id of the block
@@ -133,7 +135,7 @@ public class Chunk {
         int local_y = Formulae.localBlockFromBlock(y);
         int local_z = Formulae.localBlockFromBlock(z);
 
-        int section_index = Formulae.sectionFromBlock(y);
+        int section_index = sectionFromBlock(y);
 
         int offset = local_y * 16 * 16 + local_z * 16 + local_x;
 
@@ -143,5 +145,27 @@ public class Chunk {
         } catch (NullPointerException e) {
             return (byte) 0;
         }
+    }
+
+    public byte getBlockAddId(int x, int y, int z) {
+        int local_x = Formulae.localBlockFromBlock(x);
+        int local_y = Formulae.localBlockFromBlock(y);
+        int local_z = Formulae.localBlockFromBlock(z);
+
+        int section_index = sectionFromBlock(y);
+
+        int offset = local_y * 16 * 16 + local_z * 16 + local_x;
+
+        try {
+            ByteArrayTag add_bytes_tag = (ByteArrayTag) sections[section_index].get("Add");
+            return add_bytes_tag.data[offset];
+        } catch (NullPointerException e) {
+            return (byte) 0;
+        }
+    }
+
+    public Block getBlock(Coordinates3d cords) {
+        byte section_index = (byte) sectionFromBlock(cords.getY());
+        return new Block(cords, getSection(section_index));
     }
 }
