@@ -15,7 +15,7 @@ public class TestBlock {
 
         World world;
         Coordinates3d cords = new Coordinates3d(-3, 64, 6);
-        byte id_to_make = 6;
+        byte id_to_make = 7;
 
         try {
 
@@ -31,7 +31,6 @@ public class TestBlock {
             world.save();
 
             world = new World(new File (path_to_mca_folder));
-            test_block = world.getBlock(cords);
             byte id = world.getBlockId(cords);
 
             assertTrue(id == id_to_make);
