@@ -2,17 +2,20 @@ package mregioneer.mcaliases;
 
 
 import com.mojang.nbt.ByteArrayTag;
+import com.mojang.nbt.CompoundTag;
 import mregioneer.utils.Coordinates3d;
 import mregioneer.utils.Formulae;
 import mregioneer.utils.Helpers;
+
+import java.util.Arrays;
 
 public class Block {
     private final int x;
     private final int z;
     private final int y;
 
+    private final CompoundTag section;
     private final int section_index;
-
     private final int offset;
 
     private byte id_a;
@@ -24,19 +27,19 @@ public class Block {
     private TileEntity tileEntity = null;
 
     protected Block(Coordinates3d cords, Section section) {
+        this.blocks = ((ByteArrayTag)section.get("Blocks")).data;
+
         this.x = cords.getX();
         this.z = cords.getZ();
         this.y = cords.getY();
 
-        this.blocks = ((ByteArrayTag)section.get("Blocks")).data;
+        int section_index = Formulae.sectionFromBlock(y);
+        this.section_index = section_index;
+        this.section = section.getTag();
 
         int local_x = Formulae.localBlockFromBlock(x);
         int local_y = Formulae.localBlockFromBlock(y);
         int local_z = Formulae.localBlockFromBlock(z);
-
-        int section_index = Formulae.sectionFromBlock(y);
-        this.section_index = section_index;
-
         this.offset = local_y * 16 * 16 + local_z * 16 + local_x;
 
         this.id_a = blocks[offset];
@@ -73,11 +76,19 @@ public class Block {
         return id_b;
     }
 
-    /* method should work with 4-bits
     public void setId_b(byte id_b) {
-        this.id_b = id_b;
+        if ((add == null) && (id_b != 0)) {
+            add = new byte[2048];
+            Arrays.fill(add, (byte) 0);
+
+            add = Helpers.writeNibble4(add, id_b, this.offset);
+
+            ByteArrayTag bytes_tag = new ByteArrayTag("Add", add);
+
+            section.put("Add", bytes_tag);
+        }
     }
-    */
+
 
     /* not implemented yet
     public TileEntity getTileEntity() {
