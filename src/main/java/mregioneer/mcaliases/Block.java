@@ -10,9 +10,9 @@ import mregioneer.utils.Helpers;
 import java.util.Arrays;
 
 public class Block {
-    private final int x;
-    private final int z;
-    private final int y;
+    public final int x;
+    public final int z;
+    public final int y;
 
     private final CompoundTag section;
     private final int section_index;

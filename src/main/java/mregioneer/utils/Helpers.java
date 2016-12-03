@@ -1,6 +1,8 @@
 package mregioneer.utils;
 
 
+import mregioneer.mcaliases.Vector;
+
 public class Helpers {
     /**
      * Helps to calculate offset for Add and Data sections which are known to keep 4 bits for a block

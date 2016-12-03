@@ -5,8 +5,8 @@ package mregioneer.utils;
  * All new inctanses of the class with simular params returns the same hash code
  */
 public class Coordinates2d {
-    private final int x;
-    private final int z;
+    public final int x;
+    public final int z;
 
     private final String coordinates_as_string;
 
