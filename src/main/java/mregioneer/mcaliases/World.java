@@ -1,9 +1,10 @@
 package mregioneer.mcaliases;
 
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
+import mregioneer.utils.Point2d;
 import mregioneer.utils.Point3d;
 import net.minecraft.world.level.chunk.storage.RegionFile;
-import mregioneer.utils.Coordinates2d;
+import mregioneer.utils.Point2d;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,9 +19,9 @@ public class World {
 
     private final File world_dir;
 
-    private Map<Coordinates2d, RegionFile> region_files = new HashMap<Coordinates2d, RegionFile>();
+    private Map<Point2d, RegionFile> region_files = new HashMap<Point2d, RegionFile>();
 
-    private ConcurrentMap<Coordinates2d, Region> regions = new ConcurrentLinkedHashMap.Builder<Coordinates2d, Region>()
+    private ConcurrentMap<Point2d, Region> regions = new ConcurrentLinkedHashMap.Builder<Point2d, Region>()
             .maximumWeightedCapacity(10)
             .build();
 
@@ -48,7 +49,7 @@ public class World {
                 int x = Integer.parseInt(splitted_file_name[1]);
                 int z =Integer.parseInt(splitted_file_name[2]);
 
-                Coordinates2d region_file_coord = new Coordinates2d(x, z);
+                Point2d region_file_coord = new Point2d(x, z);
                 region_files.put(region_file_coord, region_file);
             }
         }
@@ -73,7 +74,7 @@ public class World {
      */
     public Region getRegion(int x, int z) {
 
-        Coordinates2d cords = new Coordinates2d(x, z);
+        Point2d cords = new Point2d(x, z);
 
         if(regions.containsKey(cords)) {
             return  regions.get(cords);
