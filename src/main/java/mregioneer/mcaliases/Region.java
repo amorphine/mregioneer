@@ -5,7 +5,7 @@ import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.NbtIo;
 import mregioneer.utils.Point3d;
 import net.minecraft.world.level.chunk.storage.RegionFile;
-import mregioneer.utils.Coordinates2d;
+import mregioneer.utils.Point2d;
 import mregioneer.utils.Formulae;
 
 import java.io.DataInputStream;
@@ -35,7 +35,7 @@ public class Region {
                     tag = null;
                 }
 
-                Coordinates2d local_cords = new Coordinates2d(i, j);
+                Point2d local_cords = new Point2d(i, j);
 
                 Chunk chunk = null;
                 if (tag != null)
@@ -55,7 +55,7 @@ public class Region {
      * @param cords XZ coordinates for chunk
      * @return
      */
-    public Chunk getChunk(Coordinates2d cords) {
+    public Chunk getChunk(Point2d cords) {
         return chunks[cords.getX()][cords.getZ()];
     }
 
@@ -82,7 +82,7 @@ public class Region {
      * @param tag
      * @throws IOException
      */
-    public void saveTagAsChunk(Coordinates2d cords, CompoundTag tag) throws IOException{
+    public void saveTagAsChunk(Point2d cords, CompoundTag tag) throws IOException{
 
         int global_x = cords.getX();
         int global_z = cords.getZ();

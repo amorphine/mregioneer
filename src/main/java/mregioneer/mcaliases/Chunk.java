@@ -5,7 +5,7 @@ import com.mojang.nbt.ByteArrayTag;
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.IntTag;
 import com.mojang.nbt.ListTag;
-import mregioneer.utils.Coordinates2d;
+import mregioneer.utils.Point2d;
 import mregioneer.utils.Point3d;
 import mregioneer.utils.Formulae;
 
@@ -24,7 +24,7 @@ public class Chunk {
 
     private Section[] sections = new Section[16];
 
-    public Chunk(Coordinates2d local_cords, CompoundTag tag) {
+    public Chunk(Point2d local_cords, CompoundTag tag) {
         this.tag = tag;
 
         CompoundTag c_tag_level = (CompoundTag) tag.get("Level");

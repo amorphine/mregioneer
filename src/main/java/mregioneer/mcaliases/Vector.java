@@ -61,7 +61,7 @@ public class Vector {
         int width = getXend() - getXstart() + 1;
         int depth = getYend() - getYstart() + 1;
 
-        //Coordinates3d[] cords_arr = new Coordinates3d[depth * height * width];
+        //Point3d[] cords_arr = new Point3d[depth * height * width];
         ArrayList cords_arr_list = new ArrayList<Point3d>();
 
         for(int z = getZstart(); z <= getZend(); z++) {

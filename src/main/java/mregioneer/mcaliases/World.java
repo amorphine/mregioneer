@@ -1,16 +1,19 @@
 package mregioneer.mcaliases;
 
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
+import com.googlecode.concurrentlinkedhashmap.EvictionListener;
 import mregioneer.utils.Point2d;
 import mregioneer.utils.Point3d;
 import net.minecraft.world.level.chunk.storage.RegionFile;
-import mregioneer.utils.Point2d;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static mregioneer.utils.Formulae.regionFromBlock;
 
@@ -21,8 +24,25 @@ public class World {
 
     private Map<Point2d, RegionFile> region_files = new HashMap<Point2d, RegionFile>();
 
+    EvictionListener<Point2d, Region> listener;
+    {
+        listener = new EvictionListener<Point2d, Region>() {
+            final ExecutorService executor = Executors.newSingleThreadExecutor();
+
+            public void onEviction(Point2d region_point, final Region region) {
+                executor.submit(new Callable<Void>() {
+                    public Void call() throws IOException {
+                        region.save();
+                        return null;
+                    }
+                });
+            }
+        };
+    }
+
     private ConcurrentMap<Point2d, Region> regions = new ConcurrentLinkedHashMap.Builder<Point2d, Region>()
             .maximumWeightedCapacity(10)
+            .listener(listener)
             .build();
 
     public World(File world_dir) throws IOException {
