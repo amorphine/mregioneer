@@ -1,7 +1,7 @@
 import org.ini4j.Ini;
 import org.junit.Test;
 import mregioneer.mcaliases.World;
-import mregioneer.utils.Coordinates3d;
+import mregioneer.utils.Point3d;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,18 +24,18 @@ public class TestReadWrite2 {
 
             world = new World(new File (path_to_mca_folder));
 
-            Coordinates3d cords;
+            Point3d cords;
             for(int inty = 6; inty < 100; inty++){
                 for(int intz = -10; intz < 10; intz++){
                     for(int intx = -10; intx < 10; intx++){
-                        world.changeBlockID(new Coordinates3d(intx, inty, intz), id_to_make);
+                        world.changeBlockID(new Point3d(intx, inty, intz), id_to_make);
                     }
                 }
             }
             world.save();
 
             world = new World(new File (path_to_mca_folder));
-            cords = new Coordinates3d(1, 66 ,1);
+            cords = new Point3d(1, 66 ,1);
             byte id = world.getBlockId(cords);
 
             assertTrue(id == id_to_make);

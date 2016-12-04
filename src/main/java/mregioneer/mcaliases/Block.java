@@ -3,7 +3,7 @@ package mregioneer.mcaliases;
 
 import com.mojang.nbt.ByteArrayTag;
 import com.mojang.nbt.CompoundTag;
-import mregioneer.utils.Coordinates3d;
+import mregioneer.utils.Point3d;
 import mregioneer.utils.Formulae;
 import mregioneer.utils.Helpers;
 
@@ -26,7 +26,7 @@ public class Block {
 
     private TileEntity tileEntity = null;
 
-    protected Block(Coordinates3d cords, Section section) {
+    protected Block(Point3d cords, Section section) {
         this.blocks = ((ByteArrayTag)section.get("Blocks")).data;
 
         this.x = cords.getX();

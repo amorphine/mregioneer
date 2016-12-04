@@ -1,7 +1,7 @@
 package mregioneer.mcaliases;
 
 import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
-import mregioneer.utils.Coordinates3d;
+import mregioneer.utils.Point3d;
 import net.minecraft.world.level.chunk.storage.RegionFile;
 import mregioneer.utils.Coordinates2d;
 
@@ -93,7 +93,7 @@ public class World {
      * @param id
      * @throws IOException
      */
-    public void changeBlockID(Coordinates3d cords, byte id) throws IOException {
+    public void changeBlockID(Point3d cords, byte id) throws IOException {
         int region_x = regionFromBlock(cords.getX());
         int region_z = regionFromBlock(cords.getZ());
 
@@ -106,7 +106,7 @@ public class World {
      * @param cords
      * @return
      */
-    public byte getBlockId(Coordinates3d cords) {
+    public byte getBlockId(Point3d cords) {
         int region_x = regionFromBlock(cords.getX());
         int region_z = regionFromBlock(cords.getZ());
 
@@ -114,7 +114,7 @@ public class World {
         return region.getBlockId(cords);
     }
 
-    public byte getBlockAddId(Coordinates3d cords) {
+    public byte getBlockAddId(Point3d cords) {
         int region_x = regionFromBlock(cords.getX());
         int region_z = regionFromBlock(cords.getZ());
 
@@ -122,7 +122,7 @@ public class World {
         return region.getBlockAddId(cords);
     }
 
-    public Block getBlock(Coordinates3d cords) {
+    public Block getBlock(Point3d cords) {
         int region_x = regionFromBlock(cords.getX());
         int region_z = regionFromBlock(cords.getZ());
 

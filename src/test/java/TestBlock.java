@@ -1,6 +1,6 @@
 import mregioneer.mcaliases.Block;
 import mregioneer.mcaliases.World;
-import mregioneer.utils.Coordinates3d;
+import mregioneer.utils.Point3d;
 import org.ini4j.Ini;
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ public class TestBlock {
     public void testAdd() {
 
         World world;
-        Coordinates3d cords = new Coordinates3d(-3, 64, 6);
+        Point3d cords = new Point3d(-3, 64, 6);
         byte id_to_make = 7;
 
         try {

@@ -3,7 +3,7 @@ package mregioneer.mcaliases;
 
 import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.NbtIo;
-import mregioneer.utils.Coordinates3d;
+import mregioneer.utils.Point3d;
 import net.minecraft.world.level.chunk.storage.RegionFile;
 import mregioneer.utils.Coordinates2d;
 import mregioneer.utils.Formulae;
@@ -126,7 +126,7 @@ public class Region {
      * @param id
      * @throws IOException
      */
-    public void changeBlockId(Coordinates3d cords, byte id) throws IOException {
+    public void changeBlockId(Point3d cords, byte id) throws IOException {
         int block_global_x = cords.getX();
         int block_global_z = cords.getZ();
 
@@ -143,7 +143,7 @@ public class Region {
      * @param cords
      * @return
      */
-    public byte getBlockId(Coordinates3d cords) {
+    public byte getBlockId(Point3d cords) {
         int block_global_x = cords.getX();
         int block_global_z = cords.getZ();
         int block_global_y = cords.getY();
@@ -157,7 +157,7 @@ public class Region {
         return id;
     }
 
-    public byte getBlockAddId(Coordinates3d cords) {
+    public byte getBlockAddId(Point3d cords) {
         int block_global_x = cords.getX();
         int block_global_z = cords.getZ();
         int block_global_y = cords.getY();
@@ -171,7 +171,7 @@ public class Region {
         return id;
     }
 
-    public Block getBlock(Coordinates3d cords) {
+    public Block getBlock(Point3d cords) {
         int block_global_x = cords.getX();
         int block_global_z = cords.getZ();
 

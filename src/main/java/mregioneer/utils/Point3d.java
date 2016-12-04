@@ -4,14 +4,14 @@ package mregioneer.utils;
  * The class has been created to use as a key for hash maps containing chunks, regions and so on.
  * All new inctanses of the class with simular params returns the same hash code
  */
-public class Coordinates3d {
+public class Point3d {
     public final int x;
     public final int y;
     public final int z;
 
     private final String coordinates_as_string;
 
-    public Coordinates3d(int x, int y, int z) {
+    public Point3d(int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -51,7 +51,7 @@ public class Coordinates3d {
             return false;
         else
         {
-            Coordinates3d tmp = (Coordinates3d)obj;
+            Point3d tmp = (Point3d)obj;
             return tmp.toString().equals(this.toString());
         }
     }

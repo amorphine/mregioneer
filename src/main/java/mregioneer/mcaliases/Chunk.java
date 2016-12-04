@@ -6,7 +6,7 @@ import com.mojang.nbt.CompoundTag;
 import com.mojang.nbt.IntTag;
 import com.mojang.nbt.ListTag;
 import mregioneer.utils.Coordinates2d;
-import mregioneer.utils.Coordinates3d;
+import mregioneer.utils.Point3d;
 import mregioneer.utils.Formulae;
 
 import static mregioneer.utils.Formulae.sectionFromBlock;
@@ -108,7 +108,7 @@ public class Chunk {
      * @param cords
      * @param id
      */
-    public void changeBlockId(Coordinates3d cords, byte id) {
+    public void changeBlockId(Point3d cords, byte id) {
         int local_x = Formulae.localBlockFromBlock(cords.getX());
         int local_y = Formulae.localBlockFromBlock(cords.getY());
         int local_z = Formulae.localBlockFromBlock(cords.getZ());
@@ -164,7 +164,7 @@ public class Chunk {
         }
     }
 
-    public Block getBlock(Coordinates3d cords) {
+    public Block getBlock(Point3d cords) {
         byte section_index = (byte) sectionFromBlock(cords.getY());
         return new Block(cords, getSection(section_index));
     }
