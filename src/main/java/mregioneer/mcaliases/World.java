@@ -24,6 +24,7 @@ public class World {
 
     private Map<Point2d, RegionFile> region_files = new HashMap<Point2d, RegionFile>();
 
+    //listener to save regions if they are removed from cache
     EvictionListener<Point2d, Region> listener;
     {
         listener = new EvictionListener<Point2d, Region>() {
@@ -45,6 +46,11 @@ public class World {
             .listener(listener)
             .build();
 
+    /**
+     * World constructor. Default region quantity is set to 10
+     * @param world_dir mca files directory
+     * @throws IOException
+     */
     public World(File world_dir) throws IOException {
 
         this.world_dir = world_dir;
@@ -74,7 +80,13 @@ public class World {
             }
         }
     }
-    
+
+    /**
+     * World constructor
+     * @param world_dir mca files directory
+     * @param region_limit sets how many regions will be cached
+     * @throws IOException
+     */
     public World(File world_dir, int region_limit) throws IOException {
         this(world_dir);
 
