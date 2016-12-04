@@ -12,6 +12,6 @@ public class TestVector {
 
         Vector vector = new Vector(cords1, cords2);
 
-        List arr = vector.getCoordinatesArray();
+        List arr = vector.getCuboidPoints();
     }
 }

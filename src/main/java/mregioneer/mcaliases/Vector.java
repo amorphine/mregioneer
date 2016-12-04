@@ -55,7 +55,7 @@ public class Vector {
     }
 
 
-    public List<Point3d> getCoordinatesArray() {
+    public List<Point3d> getCuboidPoints() {
 
         int height = getZend() - getZstart() + 1;
         int width = getXend() - getXstart() + 1;
