@@ -74,6 +74,15 @@ public class World {
             }
         }
     }
+    
+    public World(File world_dir, int region_limit) throws IOException {
+        this(world_dir);
+
+        this.regions = new ConcurrentLinkedHashMap.Builder<Point2d, Region>()
+                .maximumWeightedCapacity(region_limit)
+                .listener(listener)
+                .build();
+    }
 
     /**
      * Save all cashed regions to their files
